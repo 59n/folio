@@ -2,17 +2,63 @@
 
 A minimal, dark-themed personal portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Inspired by [adryd.com](https://adryd.com/), [prpl.wtf](https://prpl.wtf/), and [matdoes.dev](https://matdoes.dev/).
 
+## 🎯 Live Demo
+
+**👉 [View Live Demo](https://foliopreview.netlify.app/)**
+
+### What You'll See
+
+The live demo showcases all features of the portfolio:
+
+**🏠 Homepage**
+- Minimal dark-themed design with centered layout
+- Social icons (GitHub, Email, Solo.to)
+- Navigation buttons to Blog and Projects sections
+- Clean typography and spacing
+
+**📝 Blog Page**
+- Search bar with debounced input
+- Multiple filters: Tags, Year, and **Has Files** (filter posts with/without attachments)
+- Pagination controls
+- Example blog posts with tags and metadata
+- See the "Has Files" filter in action
+
+**📄 Blog Post Page**
+- Full markdown rendering with beautiful typography
+- **File Attachments section** at the bottom showing:
+  - PDF documents with document icons
+  - ZIP archives with download icons
+  - Text files with file icons
+  - File sizes and download links
+- Example: "Complete Guide to Next.js Deployment" post demonstrates file attachments
+
+**💼 Projects Page**
+- Grid layout of GitHub repositories
+- Project cards with descriptions
+- Language indicators
+- Star counts
+- Updated dates
+- "View Live" links for projects with homepages
+- Pagination for multiple pages
+
+**🎮 Interactive Features**
+- Try the easter eggs mentioned below
+- Test the search and filter functionality
+- Navigate through paginated content
+
 ## ✨ Features
 
 - 🎨 **Minimal Dark Theme** - Clean, modern design with fully customizable colors
 - 📝 **Markdown Blog** - Write blog posts in markdown with frontmatter support
+- 📎 **File Attachments** - Attach files (PDFs, ZIPs, documents) to blog posts for guides and resources
 - 💼 **GitHub Projects Integration** - Automatically fetches and displays your GitHub repositories
-- 🔍 **Advanced Search & Filters** - Search blog posts and filter by tags/year with pagination
+- 🔍 **Advanced Search & Filters** - Search blog posts and filter by tags, year, and file attachments with pagination
 - 📄 **Pagination** - Navigate through projects and blog posts with smart page controls
 - 🎮 **Hidden Easter Eggs** - Multiple interactive easter eggs throughout the site
 - ⚙️ **Fully Configurable** - Everything customizable via centralized `config/site.ts`
 - 📱 **Fully Responsive** - Works beautifully on all devices
 - 🌈 **Rainbow Mode** - Toggle colorful overlay with keyboard shortcut
+- 🖼️ **Image Support** - Add images to blog posts with automatic styling
 
 ## 🚀 Getting Started
 
@@ -59,10 +105,49 @@ title: "My First Post"
 date: "2024-01-15"
 tags: ["javascript", "react", "tutorial"]
 excerpt: "A short description of your post"
+attachments:
+  - name: "Guide PDF"
+    url: "/attachments/guide.pdf"
+    size: "245 KB"
+    type: "pdf"
 ---
 
 Your blog post content here! Supports full markdown.
 ```
+
+### 📎 File Attachments
+
+You can attach files to blog posts, perfect for guides, templates, or resources:
+
+1. **Place files** in `public/attachments/` directory
+2. **Add to frontmatter**:
+```yaml
+attachments:
+  - name: "Complete Guide PDF"
+    url: "/attachments/guide.pdf"
+    size: "245 KB"
+    type: "pdf"
+  - name: "Template File"
+    url: "/attachments/template.txt"
+    size: "1.2 KB"
+    type: "txt"
+```
+
+**Supported file types:**
+- PDF documents
+- ZIP/RAR/7Z archives
+- DOC/DOCX documents
+- XLS/XLSX spreadsheets
+- TXT text files
+- External URLs (any file type)
+
+Attachments appear at the bottom of blog posts with:
+- File type icons
+- File names and sizes
+- Download links
+- Hover effects
+
+**Filter by attachments:** Use the "Has Files" filter on the blog page to show only posts with or without attachments.
 
 ## ⚙️ Configuration
 
@@ -119,6 +204,8 @@ The site includes several hidden easter eggs:
 - **Title Click**: Click the site title 5 times quickly
 - **Rainbow Mode**: Press `Ctrl/Cmd + Shift + R` to toggle colorful overlay
 
+Try them out on the [live demo](https://foliopreview.netlify.app/)!
+
 ## 🏗️ Project Structure
 
 ```
@@ -137,6 +224,7 @@ The site includes several hidden easter eggs:
 │   ├── Footer.tsx       # Site footer
 │   ├── ClickableTitle.tsx # Title component with easter egg
 │   ├── BlogFilters.tsx  # Blog search and filter controls
+│   ├── Attachments.tsx  # File attachments display component
 │   └── EasterEgg.tsx   # Easter egg system
 ├── config/
 │   └── site.ts          # Centralized site configuration
@@ -144,7 +232,8 @@ The site includes several hidden easter eggs:
 │   └── posts/           # Blog post markdown files
 ├── lib/
 │   └── posts.ts         # Blog post utilities and parsing
-├── public/              # Static assets (favicons, etc.)
+├── public/              # Static assets (favicons, images, etc.)
+│   └── attachments/    # Blog post file attachments
 ├── netlify.toml         # Netlify deployment configuration
 └── package.json
 ```
@@ -156,6 +245,7 @@ The site includes several hidden easter eggs:
 - **Tailwind CSS** - Utility-first CSS framework
 - **gray-matter** - Markdown frontmatter parsing
 - **remark** - Markdown processing and HTML conversion
+- **@tailwindcss/typography** - Beautiful typography for markdown content
 
 ## 📦 Scripts
 
@@ -206,15 +296,40 @@ Edit `config/site.ts` → `layout` section
 ### Blog
 - Add markdown files to `content/posts/`
 - Configure in `config/site.ts` → `blog`
+- Add file attachments to posts (see [BLOG_README.md](./BLOG_README.md))
+- Filter posts by tags, year, and file attachments
 
 ### Projects
 - Configure GitHub user in `config/site.ts` → `projects`
 - Customize display options (stars, language, dates)
+- Exclude specific repositories via `excludePatterns`
 
 ## 📚 Documentation
 
-- [BLOG_README.md](./BLOG_README.md) - Blog post creation guide
+- [BLOG_README.md](./BLOG_README.md) - Blog post creation guide (includes file attachments and images)
 - [CONFIG_README.md](./CONFIG_README.md) - Complete configuration reference
+
+### Key Features Documentation
+
+**File Attachments:**
+- Place files in `public/attachments/` directory
+- Add `attachments` array to blog post frontmatter
+- Supports local files and external URLs
+- Automatic file type icons and styling
+- Filter posts by "Has Files" on blog page
+
+**Images in Blog Posts:**
+- Place images in `public/` directory
+- Use standard markdown: `![Alt text](/image.jpg)`
+- Automatic styling with rounded corners and shadows
+- Supports both local and external images
+
+**Blog Filters:**
+- **Search**: Full-text search across titles, excerpts, and content
+- **Tags**: Filter by post tags
+- **Year**: Filter by publication year
+- **Has Files**: Filter posts with/without attachments
+- All filters work together and persist in URL
 
 ## 🤝 Contributing
 
