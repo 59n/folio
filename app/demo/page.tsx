@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -331,7 +331,7 @@ const themes: ThemeInfo[] = [
   },
 ]
 
-export default function DemoPage() {
+function DemoContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [selectedTheme, setSelectedTheme] = useState<string>('default')
@@ -516,6 +516,26 @@ export default function DemoPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function DemoPage() {
+  return (
+    <Suspense fallback={
+      <main 
+        className="flex min-h-screen items-center justify-center antialiased"
+        style={{
+          backgroundColor: '#000000',
+          color: '#ffffff',
+        }}
+      >
+        <div className="mx-auto w-full max-w-6xl px-6 py-12 text-center">
+          <p className="text-gray-400">Loading theme demo...</p>
+        </div>
+      </main>
+    }>
+      <DemoContent />
+    </Suspense>
   )
 }
 
