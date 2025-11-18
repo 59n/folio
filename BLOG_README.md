@@ -48,7 +48,38 @@ You can use standard markdown:
 - Lists (ordered and unordered)
 - Links
 - Code blocks
+- **Images** - See below for details
 - And more!
+
+## Adding Images
+
+### Local Images
+
+Place images in the `public/` directory, then reference them:
+
+```markdown
+![Alt text](/image-name.jpg)
+```
+
+Example: If you have `public/my-photo.jpg`:
+```markdown
+![My photo](/my-photo.jpg)
+```
+
+### External Images
+
+Use full URLs for external images:
+
+```markdown
+![Alt text](https://example.com/image.jpg)
+```
+
+### Image Best Practices
+
+- Use descriptive alt text for accessibility
+- Optimize images before uploading (compress, resize)
+- Keep file sizes reasonable for faster loading
+- Images are automatically styled with rounded corners and shadows
 
 ## Viewing Your Posts
 

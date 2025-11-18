@@ -86,7 +86,8 @@ export default async function PostPage({
               prose-code:text-gray-300 prose-code:bg-gray-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
               prose-pre:bg-gray-900 prose-pre:text-gray-300 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto
               prose-blockquote:border-l-4 prose-blockquote:border-gray-700 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-400
-              prose-hr:border-gray-800 prose-hr:my-8"
+              prose-hr:border-gray-800 prose-hr:my-8
+              prose-img:rounded-lg prose-img:my-6 prose-img:mx-auto prose-img:shadow-lg"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
         </article>
